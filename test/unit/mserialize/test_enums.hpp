@@ -44,6 +44,14 @@ struct EnumNest
   } Nested; // field name and enum name are the same
 };
 
+typedef enum : int {
+  Papa
+} UnnamedEnumTypedef;
+
 } // namespace test
+
+enum UnscopedEnum : int {
+  Quebec
+};
 
 #endif // TEST_UNIT_MSERIALIZE_TEST_ENUMS_HPP

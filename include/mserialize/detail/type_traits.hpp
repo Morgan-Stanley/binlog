@@ -107,6 +107,11 @@ struct deep_remove_const<const T<E...>> : deep_remove_const<T<E...>> {};
 template <typename T>
 using deep_remove_const_t = typename deep_remove_const<T>::type;
 
+// type_identity (c++20)
+
+template <typename T>
+struct type_identity { using type = T; };
+
 } // namespace detail
 } // namespace mserialize
 

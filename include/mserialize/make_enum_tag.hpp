@@ -5,6 +5,7 @@
 #include <mserialize/detail/foreach.hpp>
 #include <mserialize/detail/integer_to_hex.hpp>
 #include <mserialize/detail/preprocessor.hpp>
+#include <mserialize/detail/type_traits.hpp>
 #include <mserialize/tag.hpp>
 
 /**
@@ -35,9 +36,11 @@
 #define MSERIALIZE_MAKE_ENUM_TAG(...)                          \
   namespace mserialize {                                       \
   template <>                                                  \
-  struct CustomTag<enum MSERIALIZE_FIRST(__VA_ARGS__)>         \
+  struct CustomTag<typename ::MSERIALIZE_FIRST(__VA_ARGS__)>   \
   {                                                            \
-    typedef enum MSERIALIZE_FIRST(__VA_ARGS__) Enum;           \
+    using Enum = detail::type_identity<                        \
+      typename ::MSERIALIZE_FIRST(__VA_ARGS__)                 \
+    >::type;                                                   \
     using underlying_t = std::underlying_type_t<Enum>;         \
                                                                \
     static constexpr auto tag_string()                         \
